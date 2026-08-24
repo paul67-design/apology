@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>I'm Sorry 💜</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: "Segoe UI", sans-serif;
+
+    background:
+        radial-gradient(circle at top, #8e6ac8, transparent 45%),
+        linear-gradient(135deg, #24113d, #3b1760, #5d2b87);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+/* Main Card */
+
+.card {
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+    padding: 35px 25px;
+
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 30px;
+
+    box-shadow: 0 20px 50px rgba(0,0,0,.3);
+
+    z-index: 10;
+}
+
+h1 {
+    font-size: 52px;
+    margin: 0 0 10px;
+
+    text-shadow: 0 0 20px #d8b4ff;
+}
+
+.subtitle {
+    font-size: 18px;
+    opacity: .9;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+/* Button */
+
+button {
+    border: none;
+    padding: 15px 32px;
+
+    border-radius: 30px;
+
+    background: linear-gradient(135deg, #a875ff, #d09aff);
+
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 25px rgba(170,100,255,.4);
+
+    transition: .3s;
+}
+
+button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 35px rgba(210,150,255,.6);
+}
+
+/* Apology */
+
+.message {
+    display: none;
+
+    margin-top: 25px;
+
+    font-size: 19px;
+    line-height: 1.7;
+
+    animation: messageAppear 1.5s ease forwards;
+}
+
+.message strong {
+    font-size: 26px;
+    color: #e5c7ff;
+}
+
+@keyframes messageAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* Violet Flowers */
+
+.flower {
+    position: absolute;
+
+    bottom: -100px;
+
+    font-size: 55px;
+
+    opacity: 0;
+
+    animation: flowerRise 5s ease-out forwards;
+
+    pointer-events: none;
+
+    filter: drop-shadow(0 0 10px #c58cff);
+}
+
+@keyframes flowerRise {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(0deg)
+            scale(.2);
+
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translateY(-110vh)
+            rotate(360deg)
+            scale(1);
+
+        opacity: 0;
+    }
+
+}
+
+/* Falling petals */
+
+.petal {
+    position: absolute;
+
+    top: -30px;
+
+    font-size: 20px;
+
+    color: #d8aaff;
+
+    animation: fall linear infinite;
+
+    pointer-events: none;
+}
+
+@keyframes fall {
+
+    from {
+        transform: translateY(-30px) rotate(0deg);
+    }
+
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+
+}
+
+/* Sparkles */
+
+.sparkle {
+    position: absolute;
+
+    color: #ead8ff;
+
+    font-size: 18px;
+
+    animation: sparkle 2s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+@keyframes sparkle {
+
+    0%, 100% {
+        opacity: .2;
+        transform: scale(.6);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.4);
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <h1>SOORRRYY BABBYYY</h1>
+
+    <div class="subtitle">
+        hiii babyy, i made this kasi i felt so bad kagabi
+    </div>
+
+    <button onclick="openApology()">
+         Open thiss
+    </button>
+
+    <div class="message" id="message">
+
+        <strong>I'm really sorryyy po</strong>
+
+        <br><br>
+
+        soo soreyy babyy kasi laro me ng laro huhuhu
+      dapat tayo yung naglalaro ih
+
+        <br>
+
+        naguguilty ako kasi inaya moko nag laro e tapos
+      ayon im so sorry talagaaaaa
+        <br><br>
+
+    pleasee accept my apologyyy heheheh iloooveyouusoomuch
+
+        <br><br>
+
+        <span style="font-size:28px;">
+            🌷🌸💜🌸🌷
+        </span>
+
+    </div>
+
+</div>
+
+<script>
+
+function openApology() {
+
+    document.getElementById("message").style.display = "block";
+
+    /* Violet flowers */
+
+    const flowers = [
+        "🌷",
+        "🌸",
+        "💜",
+        "🪻",
+        "🌺"
+    ];
+
+    for (let i = 0; i < 35; i++) {
+
+        const flower = document.createElement("div");
+
+        flower.className = "flower";
+
+        flower.innerHTML =
+            flowers[Math.floor(Math.random() * flowers.length)];
+
+        flower.style.left =
+            Math.random() * 100 + "vw";
+
+        flower.style.animationDelay =
+            Math.random() * 2 + "s";
+
+        flower.style.fontSize =
+            (35 + Math.random() * 35) + "px";
+
+        document.body.appendChild(flower);
+
+        setTimeout(() => {
+            flower.remove();
+        }, 7000);
+    }
+
+}
+
+
+/* Sparkles */
+
+for (let i = 0; i < 40; i++) {
+
+    const sparkle = document.createElement("div");
+
+    sparkle.className = "sparkle";
+
+    sparkle.innerHTML = "✦";
+
+    sparkle.style.left =
+        Math.random() * 100 + "vw";
+
+    sparkle.style.top =
+        Math.random() * 100 + "vh";
+
+    sparkle.style.animationDelay =
+        Math.random() * 2 + "s";
+
+    document.body.appendChild(sparkle);
+}
+
+
+/* Falling violet petals */
+
+for (let i = 0; i < 20; i++) {
+
+    const petal = document.createElement("div");
+
+    petal.className = "petal";
+
+    petal.innerHTML = "✿";
+
+    petal.style.left =
+        Math.random() * 100 + "vw";
+
+    petal.style.animationDuration =
+        (5 + Math.random() * 6) + "s";
+
+    petal.style.animationDelay =
+        Math.random() * 5 + "s";
+
+    document.body.appendChild(petal);
+}
+
+</script>
+
+</body>
+</html>
