@@ -1,356 +1,479 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>I'm Sorry 💜</title>
+<title>my apologies💜</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+ background:linear-gradient(145deg,#100e2d,#25204e,#49336c);
+ color:#f8edff;
+ font-family:Georgia,serif;
+ padding:20px 12px;
+ min-height:100vh;
 }
 
-body {
-    margin: 0;
-    height: 100vh;
-    overflow: hidden;
-    font-family: "Segoe UI", sans-serif;
+.container{max-width:650px;margin:auto;text-align:center}
+.card{
+ background:#ffffff0d;
+ border:1px solid #ffffff25;
+ border-radius:20px;
+ padding:25px 18px;
+ margin-bottom:18px;
+ box-shadow:0 10px 30px #0003;
+}
+h1{font-size:34px;font-weight:normal;margin:12px 0}
+h2{font-size:21px;font-weight:normal;color:#e3b5ff}
+p{font-size:14px;line-height:1.8;color:#e0d5f4}
+.small{font-size:11px;letter-spacing:3px;color:#c9a9ed}
+button{
+ border:0;border-radius:25px;padding:12px 19px;
+ background:#9660cf;color:white;font-size:13px;
+ cursor:pointer;margin:5px;
+}
+button:active{transform:scale(.96)}
+.hidden{display:none!important}
+.section{
+ background:#ffffff0b;padding:17px;border-radius:14px;
+ margin-top:14px;text-align:left;
+}
+.section h3{color:#e5b6ff;font-weight:normal;margin-bottom:9px}
+.heart{font-size:25px;margin:15px}
+.footer{font-size:11px;color:#bca7d8;margin:20px}
 
-    background:
-        radial-gradient(circle at top, #8e6ac8, transparent 45%),
-        linear-gradient(135deg, #24113d, #3b1760, #5d2b87);
+/* CHARACTER CHOICES */
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
+.choices{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;margin-top:18px;
+}
+.choice{
+ background:#ffffff12;border:1px solid #ffffff30;
+ border-radius:17px;padding:16px 7px;
+ cursor:pointer;transition:.2s;
+}
+.choice:active{transform:scale(.96)}
+.choice .emoji{font-size:53px}
+.choice h3{font-size:15px;margin:9px 0;color:#f3c9ff}
+.choice p{font-size:11px}
+
+/* TUTORIAL */
+
+.tutorial{
+ background:#ffffff10;
+ border:1px solid #ffffff30;
+ border-radius:18px;
+ padding:15px;
+ margin-top:15px;
+}
+.topbar{
+ display:flex;align-items:center;
+ justify-content:space-between;gap:5px;
+ margin-bottom:12px;
+}
+.topbar h2{font-size:18px}
+.step-count{font-size:12px;color:#d9baff}
+
+.progress{
+ width:100%;height:6px;background:#ffffff20;
+ border-radius:20px;margin:12px 0;overflow:hidden;
+}
+.progress-fill{
+ height:100%;background:#d59aff;width:0%;
+ transition:.3s;
 }
 
-/* Main Card */
+.instruction{
+ background:#ffffff0d;border-radius:12px;
+ padding:14px;margin:12px 0;
+}
+.instruction h3{color:#e8bdff;font-size:17px;margin-bottom:7px}
+.instruction p{font-size:13px}
 
-.card {
-    text-align: center;
-    width: 90%;
-    max-width: 500px;
-    padding: 35px 25px;
+/* DRAWING STAGE */
 
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(10px);
-
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 30px;
-
-    box-shadow: 0 20px 50px rgba(0,0,0,.3);
-
-    z-index: 10;
+.stage{
+ position:relative;
+ width:100%;
+ height:310px;
+ background:#fbf7ff;
+ border-radius:14px;
+ overflow:hidden;
+ touch-action:none;
+}
+.stage svg{
+ position:absolute;
+ width:100%;height:100%;
+ inset:0;
+}
+.stage canvas{
+ position:absolute;
+ width:100%;height:100%;
+ inset:0;
+ touch-action:none;
+ cursor:crosshair;
 }
 
-h1 {
-    font-size: 52px;
-    margin: 0 0 10px;
-
-    text-shadow: 0 0 20px #d8b4ff;
+.tools{
+ display:flex;flex-wrap:wrap;
+ justify-content:center;gap:6px;margin-top:13px;
 }
+.tools button{font-size:12px;padding:10px 13px;margin:2px}
 
-.subtitle {
-    font-size: 18px;
-    opacity: .9;
-    margin-bottom: 25px;
-    line-height: 1.6;
+.colors{
+ display:flex;justify-content:center;
+ flex-wrap:wrap;gap:11px;margin:15px 0;
 }
-
-/* Button */
-
-button {
-    border: none;
-    padding: 15px 32px;
-
-    border-radius: 30px;
-
-    background: linear-gradient(135deg, #a875ff, #d09aff);
-
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
-
-    cursor: pointer;
-
-    box-shadow: 0 8px 25px rgba(170,100,255,.4);
-
-    transition: .3s;
+.swatch{
+ height:27px;width:27px;border-radius:50%;
+ border:2px solid white;cursor:pointer;
 }
-
-button:hover {
-    transform: scale(1.08);
-    box-shadow: 0 10px 35px rgba(210,150,255,.6);
+.nav{
+ display:flex;justify-content:space-between;
+ gap:8px;margin-top:15px;
 }
-
-/* Apology */
-
-.message {
-    display: none;
-
-    margin-top: 25px;
-
-    font-size: 19px;
-    line-height: 1.7;
-
-    animation: messageAppear 1.5s ease forwards;
-}
-
-.message strong {
-    font-size: 26px;
-    color: #e5c7ff;
-}
-
-@keyframes messageAppear {
-
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-}
-
-/* Violet Flowers */
-
-.flower {
-    position: absolute;
-
-    bottom: -100px;
-
-    font-size: 55px;
-
-    opacity: 0;
-
-    animation: flowerRise 5s ease-out forwards;
-
-    pointer-events: none;
-
-    filter: drop-shadow(0 0 10px #c58cff);
-}
-
-@keyframes flowerRise {
-
-    0% {
-        transform:
-            translateY(0)
-            rotate(0deg)
-            scale(.2);
-
-        opacity: 0;
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    100% {
-        transform:
-            translateY(-110vh)
-            rotate(360deg)
-            scale(1);
-
-        opacity: 0;
-    }
-
-}
-
-/* Falling petals */
-
-.petal {
-    position: absolute;
-
-    top: -30px;
-
-    font-size: 20px;
-
-    color: #d8aaff;
-
-    animation: fall linear infinite;
-
-    pointer-events: none;
-}
-
-@keyframes fall {
-
-    from {
-        transform: translateY(-30px) rotate(0deg);
-    }
-
-    to {
-        transform: translateY(110vh) rotate(360deg);
-    }
-
-}
-
-/* Sparkles */
-
-.sparkle {
-    position: absolute;
-
-    color: #ead8ff;
-
-    font-size: 18px;
-
-    animation: sparkle 2s ease-in-out infinite;
-
-    pointer-events: none;
-}
-
-@keyframes sparkle {
-
-    0%, 100% {
-        opacity: .2;
-        transform: scale(.6);
-    }
-
-    50% {
-        opacity: 1;
-        transform: scale(1.4);
-    }
-
-}
+.nav button{flex:1}
+.note{font-size:11px;color:#cbb4e9;margin-top:12px}
+#done{background:#b16bd7}
 </style>
 </head>
 
 <body>
+<div class="container">
 
-<div class="card">
+<!-- INTRO -->
+<div class="card" id="intro">
+ <div style="font-size:45px">💌 🧸 💜</div>
+ <div class="small">little uh message for u po</div>
+ <h1>Hey, Ara</h1>
+ <p>
+ I know things haven't been okay
+ yk uh ayaw ko lang na ganto tayo hahsjsjs 
+ </p>
+ <button onclick="openLetter()">please read ths</button>
+</div>
 
-    <h1>SOORRRYY BABBYYY</h1>
+<!-- APOLOGY -->
+<div id="letter" class="hidden">
 
-    <div class="subtitle">
-        hiii babyy, i made this kasi i felt so bad kagabi
-    </div>
+ <div class="card">
+  <div style="font-size:35px"></div>
+  <div class="small">I owe u this</div>
+  <h1>genuinely sorry for whst I did</h1>
 
-    <button onclick="openApology()">
-         Open thiss
-    </button>
+  <p>I know I messed up, and I want to take responsibility for that</p>
 
-    <div class="message" id="message">
+  <div class="section">
+   <h3>01. What I did wrong </h3>
+   <p>
+   okay uh i dont really know kung bat ko tinatago maybe I wssnt ready? idkk im truly sorry soo dum
+   </p>
+  </div>
 
-        <strong>I'm really sorryyy po</strong>
+  <div class="section">
+   <h3>02. What I want you to know 💜</h3>
+   <p>
+    You didn't deserve to find out that way,
+    I should've considered your feelings instead of making
+    that decision on my own, I never wanted you to feel
+    like you were someone I needed to hide.
+   </p>
+  </div>
 
-        <br><br>
+  <div class="section">
+   <h3>03. What I'll do better 🫶</h3>
+   <p>
+    I'll work on being more honest, communicating better,
+    and thinking about how my actions affect you.
+    I know words alone aren't enough so let me hehe
+   </p>
+  </div>
 
-        soo soreyy babyy kasi laro me ng laro huhuhu
-      dapat tayo yung naglalaro ih
+  <div class="heart">💗 ♡ 💗</div>
+  <p>
+   I don't expect you to forgive me right away, I mesn u already did pero aypko lang ng action na nagawa k like, im dum asf
+   I just hope you understand that I'm genuinely sorry
+   for the way I handled everything
+  </p>
+  <p style="margin-top:15px;color:#e3b5ff">— From me, with sincerity. 💌</p>
+ </div>
 
-        <br>
+ <!-- CHARACTER SELECTION -->
+ <div class="card">
+  <div style="font-size:30px">🎨✨</div>
+  <h2>Let's draww tg</h2>
+  <p>since ik na mahilig ka mag drawing ata, i think youll like this, i mesn its not that much so bare w me hehe:))</p>
 
-        naguguilty ako kasi inaya moko nag laro e tapos
-      ayon im so sorry talagaaaaa
-        <br><br>
+  <div class="choices">
 
-    pleasee accept my apologyyy heheheh iloooveyouusoomuch
+   <div class="choice" onclick="choose('kitty')">
+    <div class="emoji">🎀</div>
+    <h3>Hello Kitty</h3>
+    <p>Step-by-step drawing guide</p>
+   </div>
 
-        <br><br>
+   <div class="choice" onclick="choose('kuromi')">
+    <div class="emoji">💀</div>
+    <h3>Kuromi</h3>
+    <p>Step-by-step drawing guide</p>
+   </div>
 
-        <span style="font-size:28px;">
-            🌷🌸💜🌸🌷
-        </span>
+  </div>
+ </div>
 
-    </div>
+ <!-- TUTORIAL -->
+ <div id="tutorial" class="tutorial hidden">
+
+  <div class="topbar">
+   <button onclick="backToChoices()">← Back</button>
+   <h2 id="characterTitle">🎀 Hello Kitty</h2>
+   <span class="step-count" id="stepCount">1/6</span>
+  </div>
+
+  <div class="progress">
+   <div class="progress-fill" id="progress"></div>
+  </div>
+
+  <div class="instruction">
+   <h3 id="stepTitle">Step 1: Draw the head</h3>
+   <p id="stepDescription">Start with a big rounded shape.</p>
+  </div>
+
+  <div class="stage">
+   <div id="guide"></div>
+   <canvas id="drawCanvas"></canvas>
+  </div>
+
+  <p class="note">
+   Follow the light purple guide and draw over it
+  </p>
+
+  <div class="colors">
+   <div class="swatch" style="background:#252044" onclick="setColor('#252044')"></div>
+   <div class="swatch" style="background:#ed80bd" onclick="setColor('#ed80bd')"></div>
+   <div class="swatch" style="background:#a878e8" onclick="setColor('#a878e8')"></div>
+   <div class="swatch" style="background:#72a9e8" onclick="setColor('#72a9e8')"></div>
+   <div class="swatch" style="background:#68b99c" onclick="setColor('#68b99c')"></div>
+   <div class="swatch" style="background:#ffffff;border:2px solid #aaa" onclick="setColor('#ffffff')"></div>
+   <div class="swatch" style="background:#ffca78" onclick="setColor('#ffca78')"></div>
+  </div>
+
+  <div class="tools">
+   <button onclick="setColor('#fbf7ff')">🧽 Eraser</button>
+   <button onclick="undo()">↩ Undo</button>
+   <button onclick="clearDrawing()">🗑 Clear</button>
+  </div>
+
+  <div class="nav">
+   <button onclick="previousStep()">← Previous</button>
+   <button onclick="nextStep()" id="nextButton">Next step →</button>
+  </div>
+
+  <button id="done" onclick="finishDrawing()" class="hidden">
+   I'm done drawing! 💜
+  </button>
+
+  <p class="note">Take your time po hehe mwuahh^^</p>
+ </div>
+
+ <div id="last" class="card hidden">
+  <div style="font-size:40px">💗🧸</div>
+  <h1>Thank you.</h1>
+  <p>
+   Thank you for taking the time to read this.
+   Your feelings matter, and you deserve honesty and respect po
+  </p>
+  <div class="heart">♡</div>
+  <p>
+   I'm sorry for handling things that way
+   I hope my actions from now on can show you that I mean what I say
+  </p>
+  <p style="margin-top:15px">thsnk u po again</p>
+ </div>
 
 </div>
 
+<div class="footer">made with sincerity and w love</div>
+</div>
+
 <script>
-
-function openApology() {
-
-    document.getElementById("message").style.display = "block";
-
-    /* Violet flowers */
-
-    const flowers = [
-        "🌷",
-        "🌸",
-        "💜",
-        "🪻",
-        "🌺"
-    ];
-
-    for (let i = 0; i < 35; i++) {
-
-        const flower = document.createElement("div");
-
-        flower.className = "flower";
-
-        flower.innerHTML =
-            flowers[Math.floor(Math.random() * flowers.length)];
-
-        flower.style.left =
-            Math.random() * 100 + "vw";
-
-        flower.style.animationDelay =
-            Math.random() * 2 + "s";
-
-        flower.style.fontSize =
-            (35 + Math.random() * 35) + "px";
-
-        document.body.appendChild(flower);
-
-        setTimeout(() => {
-            flower.remove();
-        }, 7000);
-    }
-
+function openLetter(){
+ document.getElementById('intro').classList.add('hidden');
+ document.getElementById('letter').classList.remove('hidden');
 }
 
+const lessons = {
+ kitty:[
+  ["Draw the head","Start with a big rounded oval shape for her face.",
+   `<ellipse cx="160" cy="155" rx="95" ry="78"/>`],
+  ["Add the ears","Draw two small triangle-shaped ears on top.",
+   `<ellipse cx="160" cy="155" rx="95" ry="78"/><path d="M82 105 L70 38 L124 75 Z M196 75 L250 38 L238 105 Z"/>`],
+  ["Draw the face","Add two little eyes, an oval nose and whiskers.",
+   `<ellipse cx="160" cy="155" rx="95" ry="78"/><path d="M82 105 L70 38 L124 75 Z M196 75 L250 38 L238 105 Z"/><ellipse cx="125" cy="155" rx="5" ry="8"/><ellipse cx="195" cy="155" rx="5" ry="8"/><ellipse cx="160" cy="171" rx="7" ry="5"/><path d="M65 165 L100 170 M65 185 L100 180 M220 170 L255 165 M220 180 L255 185"/>`],
+  ["Add her bow","Draw a cute bow on the upper right side.",
+   `<ellipse cx="160" cy="155" rx="95" ry="78"/><path d="M82 105 L70 38 L124 75 Z M196 75 L250 38 L238 105 Z"/><ellipse cx="125" cy="155" rx="5" ry="8"/><ellipse cx="195" cy="155" rx="5" ry="8"/><ellipse cx="160" cy="171" rx="7" ry="5"/><path d="M65 165 L100 170 M65 185 L100 180 M220 170 L255 165 M220 180 L255 185"/><path d="M222 80 Q185 30 205 76 Q195 110 222 90 Q250 112 245 77 Q270 32 222 80 Z"/><circle cx="223" cy="83" r="9"/>`],
+  ["Draw her body","Add a little dress and arms below the head.",
+   `<ellipse cx="160" cy="155" rx="95" ry="78"/><path d="M82 105 L70 38 L124 75 Z M196 75 L250 38 L238 105 Z"/><ellipse cx="125" cy="155" rx="5" ry="8"/><ellipse cx="195" cy="155" rx="5" ry="8"/><ellipse cx="160" cy="171" rx="7" ry="5"/><path d="M65 165 L100 170 M65 185 L100 180 M220 170 L255 165 M220 180 L255 185"/><path d="M222 80 Q185 30 205 76 Q195 110 222 90 Q250 112 245 77 Q270 32 222 80 Z"/><circle cx="223" cy="83" r="9"/><path d="M120 230 Q160 205 200 230 L225 295 L95 295 Z M120 240 L70 265 M200 240 L250 265"/>`],
+  ["Finish it!","Add her feet, color her bow, and decorate your drawing. 🎀",
+   `<ellipse cx="160" cy="155" rx="95" ry="78"/><path d="M82 105 L70 38 L124 75 Z M196 75 L250 38 L238 105 Z"/><ellipse cx="125" cy="155" rx="5" ry="8"/><ellipse cx="195" cy="155" rx="5" ry="8"/><ellipse cx="160" cy="171" rx="7" ry="5"/><path d="M65 165 L100 170 M65 185 L100 180 M220 170 L255 165 M220 180 L255 185"/><path d="M222 80 Q185 30 205 76 Q195 110 222 90 Q250 112 245 77 Q270 32 222 80 Z"/><circle cx="223" cy="83" r="9"/><path d="M120 230 Q160 205 200 230 L225 290 L95 290 Z M120 240 L70 265 M200 240 L250 265 M125 290 Q110 315 140 315 M190 290 Q175 315 205 315"/>`]
+ ],
+ kuromi:[
+  ["Draw the head","Start with a round face shape.",
+   `<ellipse cx="160" cy="175" rx="83" ry="75"/>`],
+  ["Add the jester hood","Draw her two pointed ears and hood.",
+   `<ellipse cx="160" cy="175" rx="83" ry="75"/><path d="M85 125 L55 22 L135 77 Z M185 77 L265 22 L235 125 Z M78 105 Q160 15 242 105"/>`],
+  ["Add the skull","Draw a little skull on the center of her hood.",
+   `<ellipse cx="160" cy="175" rx="83" ry="75"/><path d="M85 125 L55 22 L135 77 Z M185 77 L265 22 L235 125 Z M78 105 Q160 15 242 105"/><circle cx="160" cy="75" r="18"/><path d="M150 87 L170 87 L170 97 L150 97 Z M152 68 L156 68 M164 68 L168 68"/>`],
+  ["Draw her face","Add eyes, a tiny nose, and her smile.",
+   `<ellipse cx="160" cy="175" rx="83" ry="75"/><path d="M85 125 L55 22 L135 77 Z M185 77 L265 22 L235 125 Z M78 105 Q160 15 242 105"/><circle cx="160" cy="75" r="18"/><path d="M150 87 L170 87 L170 97 L150 97 Z"/><ellipse cx="130" cy="170" rx="6" ry="9"/><ellipse cx="190" cy="170" rx="6" ry="9"/><path d="M145 205 Q160 220 175 205"/>`],
+  ["Add her body","Draw her little outfit and arms.",
+   `<ellipse cx="160" cy="175" rx="83" ry="75"/><path d="M85 125 L55 22 L135 77 Z M185 77 L265 22 L235 125 Z M78 105 Q160 15 242 105"/><circle cx="160" cy="75" r="18"/><path d="M150 87 L170 87 L170 97 L150 97 Z"/><ellipse cx="130" cy="170" rx="6" ry="9"/><ellipse cx="190" cy="170" rx="6" ry="9"/><path d="M145 205 Q160 220 175 205 M115 245 L205 245 L230 300 L90 300 Z M115 250 L70 280 M205 250 L250 280"/>`],
+  ["Finish Kuromi!","Add the finishing details and color her hood. 💜",
+   `<ellipse cx="160" cy="175" rx="83" ry="75"/><path d="M85 125 L55 22 L135 77 Z M185 77 L265 22 L235 125 Z M78 105 Q160 15 242 105"/><circle cx="160" cy="75" r="18"/><path d="M150 87 L170 87 L170 97 L150 97 Z"/><ellipse cx="130" cy="170" rx="6" ry="9"/><ellipse cx="190" cy="170" rx="6" ry="9"/><path d="M145 205 Q160 220 175 205 M115 245 L205 245 L230 300 L90 300 Z M115 250 L70 280 M205 250 L250 280 M120 300 Q105 320 140 320 M190 300 Q175 320 205 320"/>`]
+ ]
+};
 
-/* Sparkles */
+let character='kitty';
+let step=0;
+let color='#252044';
 
-for (let i = 0; i < 40; i++) {
+const canvas=document.getElementById('drawCanvas');
+const ctx=canvas.getContext('2d');
+let strokes=[];
+let currentStroke=null;
+let initialized=false;
 
-    const sparkle = document.createElement("div");
-
-    sparkle.className = "sparkle";
-
-    sparkle.innerHTML = "✦";
-
-    sparkle.style.left =
-        Math.random() * 100 + "vw";
-
-    sparkle.style.top =
-        Math.random() * 100 + "vh";
-
-    sparkle.style.animationDelay =
-        Math.random() * 2 + "s";
-
-    document.body.appendChild(sparkle);
+function setupCanvas(){
+ if(initialized)return;
+ const rect=canvas.getBoundingClientRect();
+ const dpr=window.devicePixelRatio||1;
+ canvas.width=rect.width*dpr;
+ canvas.height=rect.height*dpr;
+ ctx.scale(dpr,dpr);
+ ctx.lineWidth=3;
+ ctx.lineCap='round';
+ ctx.lineJoin='round';
+ initialized=true;
 }
 
+function choose(type){
+ character=type;
+ step=0;
+ strokes=[];
+ document.getElementById('tutorial').classList.remove('hidden');
+ document.getElementById('tutorial').scrollIntoView({behavior:'smooth'});
+ setupCanvas();
+ renderStep();
+}
 
-/* Falling violet petals */
+function backToChoices(){
+ document.getElementById('tutorial').classList.add('hidden');
+}
 
-for (let i = 0; i < 20; i++) {
+function renderStep(){
+ const lesson=lessons[character][step];
+ document.getElementById('characterTitle').textContent=
+ character==='kitty'?'🎀 Hello Kitty':'💜 Kuromi';
+ document.getElementById('stepTitle').textContent=
+ 'Step '+(step+1)+': '+lesson[0];
+ document.getElementById('stepDescription').textContent=lesson[1];
+ document.getElementById('stepCount').textContent=
+ (step+1)+'/6';
+ document.getElementById('progress').style.width=
+ ((step+1)/6*100)+'%';
 
-    const petal = document.createElement("div");
+ document.getElementById('guide').innerHTML=`
+ <svg viewBox="0 0 320 330" xmlns="http://www.w3.org/2000/svg">
+ <g fill="none" stroke="#b98bcf" stroke-width="3.5"
+ stroke-linecap="round" stroke-linejoin="round"
+ opacity=".72">
+ ${lesson[2]}
+ </g>
+ </svg>`;
 
-    petal.className = "petal";
+ document.getElementById('nextButton').textContent=
+ step===5?'Finish guide ✓':'Next step →';
 
-    petal.innerHTML = "✿";
+ document.getElementById('done').classList.toggle('hidden',step!==5);
+}
 
-    petal.style.left =
-        Math.random() * 100 + "vw";
+function nextStep(){
+ if(step<5){
+  step++;
+  renderStep();
+ }else{
+  finishDrawing();
+ }
+}
 
-    petal.style.animationDuration =
-        (5 + Math.random() * 6) + "s";
+function previousStep(){
+ if(step>0){
+  step--;
+  renderStep();
+ }
+}
 
-    petal.style.animationDelay =
-        Math.random() * 5 + "s";
+function setColor(c){color=c;}
 
-    document.body.appendChild(petal);
+function position(e){
+ const rect=canvas.getBoundingClientRect();
+ return {x:e.clientX-rect.left,y:e.clientY-rect.top};
+}
+
+canvas.addEventListener('pointerdown',e=>{
+ setupCanvas();
+ canvas.setPointerCapture(e.pointerId);
+ const p=position(e);
+ currentStroke={color:color,points:[p]};
+ strokes.push(currentStroke);
+});
+
+canvas.addEventListener('pointermove',e=>{
+ if(!currentStroke)return;
+ currentStroke.points.push(position(e));
+ redraw();
+});
+
+canvas.addEventListener('pointerup',()=>{currentStroke=null;});
+canvas.addEventListener('pointercancel',()=>{currentStroke=null;});
+
+function redraw(){
+ const rect=canvas.getBoundingClientRect();
+ ctx.clearRect(0,0,rect.width,rect.height);
+ strokes.forEach(s=>{
+  if(!s.points.length)return;
+  ctx.beginPath();
+  ctx.strokeStyle=s.color;
+  ctx.lineWidth=3;
+  ctx.moveTo(s.points[0].x,s.points[0].y);
+  s.points.forEach(p=>ctx.lineTo(p.x,p.y));
+  if(s.points.length===1){
+   ctx.lineTo(s.points[0].x+.1,s.points[0].y+.1);
+  }
+  ctx.stroke();
+ });
+}
+
+function undo(){
+ strokes.pop();
+ redraw();
+}
+
+function clearDrawing(){
+ strokes=[];
+ redraw();
+}
+
+function finishDrawing(){
+ document.getElementById('last').classList.remove('hidden');
+ document.getElementById('last').scrollIntoView({behavior:'smooth'});
 }
 
 </script>
-
 </body>
 </html>
